@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCtype html>
 <html lang="en">
 
 <head>
@@ -27,6 +27,8 @@
             overflow: hidden;
             transition: transform 0.2s, box-shadow 0.2s;
             height: 8cm;
+            page-break-inside: avoid;
+            break-inside: avoid;
         }
 
         .card-header {
@@ -103,32 +105,406 @@
 
     <script>
         const characters = [
+            /**
+            * GUARDAS REAIS
+            */
             {
-                name: "Artemis",
+                name: "Artenanda Jordino",
                 damage: 'd6+1',
+                type: "Guarda Real",
                 ca: 15,
                 constitution: 14,
                 description: "Guerreira ágil e estrategista.",
                 skills: "Furtividade, Acrobacia",
-                image: ""
             },
             {
-                name: "Thalion",
+                name: "Thalison Venvernorde",
                 damage: 'd6+1',
+                type: "Guarda Real",
                 ca: 13,
                 constitution: 12,
                 description: "Elfo mestre arqueiro.",
                 skills: "Precisão, Rastreamento",
-                image: ""
             },
             {
-                name: "Morgana",
+                name: "Morana Juliana",
                 damage: 'd6+4',
+                type: "Guarda Real",
                 ca: 12,
                 constitution: 10,
                 description: "Feiticeira poderosa com magia das sombras.",
                 skills: "Magia Negra, Alquimia",
                 image: null
+            },
+            {
+                name: "Rodrigo Nightwatch",
+                damage: "d6+1",
+                type: "Guarda Real",
+                ca: 14,
+                constitution: 13,
+                description: "Guardião astuto e especialista em rastreamento.",
+                skills: "Rastreamento, Combate",
+            },
+            {
+                name: "Clara Heartsteel",
+                damage: "d6",
+                type: "Guarda Real",
+                ca: 16,
+                constitution: 15,
+                description: "Guerreira com coração de aço e determinação implacável.",
+                skills: "Força, Defesa",
+            },
+            {
+                name: "Diego Shadowfang",
+                damage: "d6+2",
+                type: "Guarda Real",
+                ca: 13,
+                constitution: 12,
+                description: "Especialista em ataques surpresa.",
+                skills: "Furtividade, Ataque Rápido",
+            },
+            /**
+            * LADRÕES
+            **/
+            {
+                name: "Rafael Daruê",
+                damage: "d3+1",
+                type: "Ladrão",
+                ca: 14,
+                constitution: 12,
+                description: "Ladrão experiente e manipulador.",
+                skills: "Furtividade, Enganação",
+            },
+            {
+                name: "Cíntia Storr",
+                damage: "d6+2",
+                type: "Ladrão",
+                ca: 15,
+                constitution: 13,
+                description: "Especialista em arrombamento e combate com adagas.",
+                skills: "Lockpicking, Acrobacia",
+            },
+            {
+                name: "Leonardo Caninele",
+                damage: "d6",
+                type: "Ladrão",
+                ca: 13,
+                constitution: 11,
+                description: "Rápido e letal com armas pequenas.",
+                skills: "Escalada, Percepção",
+            },
+            {
+                name: "Thalia Sombra",
+                damage: "d6+1",
+                type: "Ladrão",
+                ca: 14,
+                constitution: 12,
+                description: "Mestra dos venenos e estratégias furtivas.",
+                skills: "Alquimia, Camuflagem",
+            },
+            {
+                name: "Igor Blackstone",
+                damage: "d6",
+                type: "Ladrão",
+                ca: 15,
+                constitution: 14,
+                description: "Mestre das lâminas duplas.",
+                skills: "Acrobacia, Lâminas",
+            },
+            {
+                name: "Victor Thundershield",
+                damage: "d6",
+                type: "Ladrão",
+                ca: 14,
+                constitution: 12,
+                description: "Defensor incansável e estrategista nato.",
+                skills: "Defesa, Tática",
+            },
+            {
+                name: "Morgana Silvertongue",
+                damage: "d6+3",
+                type: "Ladrão",
+                ca: 12,
+                constitution: 11,
+                description: "Mestra das palavras e manipuladora habilidosa.",
+                skills: "Diplomacia, Enganação",
+            },
+            /**
+            * Outros
+            **/
+            {
+
+                name: "Bianca Lâminanoite",
+                type: "Mani",
+                damage: "d6+1",
+                ca: 14,
+                constitution: 13,
+                description: "Feiticeira com habilidades em manipular luz e escuridão.",
+                skills: "Magia, Manipulação",
+            },
+            {
+
+                name: "Gabriela Almatempestade",
+                type: "Cidadão",
+                damage: "d6+2",
+                ca: 16,
+                constitution: 14,
+                description: "Guerreira com alma indomável e determinação feroz.",
+                skills: "Força, Coragem",
+            },
+            {
+
+                name: "Felipe Mãoferro",
+                type: "Ferreiro",
+                damage: "d6+1",
+                ca: 15,
+                constitution: 14,
+                description: "Ferreiro renomado e lutador robusto.",
+                skills: "Força, Fabricação",
+            },
+            {
+
+                name: "Evelyn Ventosuspiro",
+                damage: "d6",
+                type: 'cidadao',
+                ca: 13,
+                constitution: 12,
+                description: "Aventureira ágil e estrategista.",
+                skills: "Furtividade, Escalada",
+            },
+            {
+
+                name: "Elena Lâminarápida",
+                type: "Guarda",
+                damage: "d8",
+                ca: 17,
+                constitution: 15,
+                description: "Guarda habilidosa e leal, conhecida por sua destreza com a espada.",
+                skills: "Espadas, Defesa"
+            },
+            {
+
+                name: "Astrid Cavalgatempestade",
+                type: "Capitã",
+                damage: "d10",
+                ca: 18,
+                constitution: 16,
+                description: "Comandante experiente e corajosa, mestre das águas e das batalhas marítimas.",
+                skills: "Navegação, Estratégia"
+            },
+            {
+
+                name: "Gavin Pédepedra",
+                type: "Agricultor",
+                damage: "d4",
+                ca: 13,
+                constitution: 12,
+                description: "Agricultor dedicado, conhecido por sua paciência e habilidade com a terra.",
+                skills: "Cultivo, Perseverança"
+            },
+            {
+
+                name: "Lyra Sombroluar",
+                type: "Curandeira",
+                damage: "d4-1",
+                ca: 12,
+                constitution: 10,
+                description: "Curandeira gentil e sábia, especialista em ervas e remédios naturais.",
+                skills: "Medicina, Ervas"
+            },
+            {
+
+                name: "Thorn Lâminanegra",
+                type: "Ladrão",
+                damage: "d6",
+                ca: 14,
+                constitution: 13,
+                description: "Ladrão ágil e furtivo, conhecido por suas habilidades de esquiva e astúcia.",
+                skills: "Furtividade, Enganação"
+            },
+            {
+
+                name: "Hilda Cervaforte",
+                type: "Taverneira",
+                damage: "d6",
+                ca: 12,
+                constitution: 14,
+                description: "Proprietária da taverna local, famosa por sua cerveja robusta e hospitalidade calorosa.",
+                skills: "Cervejaria, Hospitalidade"
+            },
+            {
+
+                name: "Finn Barrilongo",
+                type: "Bartender",
+                damage: "d4",
+                ca: 11,
+                constitution: 12,
+                description: "Bartender experiente, conhecido por suas histórias animadas e suas habilidades com coquetéis.",
+                skills: "Carisma, Misturas"
+            },
+            {
+
+                name: "Greta Coração de Fogo",
+                type: "Mestre cervejeira",
+                damage: "d6",
+                ca: 14,
+                constitution: 15,
+                description: "Especialista em cervejas artesanais, sua taverna é famosa pela qualidade de suas bebidas e pela atmosfera acolhedora.",
+                skills: "Cervejaria, Criatividade"
+            },
+            {
+
+                name: "Alfred Moedascobre",
+                type: "Mercador",
+                damage: "d4",
+                ca: 12,
+                constitution: 11,
+                description: "Vendedor astuto, sempre com os melhores produtos e preços competitivos.",
+                skills: "Negociação, Avaliação de Itens"
+            },
+            {
+                name: "Martha Tecelina",
+                type: "Costureira",
+                damage: "d3",
+                ca: 11,
+                constitution: 10,
+                description: "Hábil com agulhas e tecidos, conhecida por criar roupas resistentes e elegantes.",
+                skills: "Costura, Criatividade"
+            },
+            {
+                name: "Samuel Prataria",
+                type: "Joalheiro",
+                damage: "d4",
+                ca: 12,
+                constitution: 11,
+                description: "Joalheiro renomado, especialista em pedras preciosas e metais raros.",
+                skills: "Lapidação, Avaliação de Gemas"
+            },
+            {
+                name: "Olivia Brotos",
+                type: "Herbalista",
+                damage: "d4-1",
+                ca: 11,
+                constitution: 10,
+                description: "Especialista em plantas medicinais e curativas, sempre com um sorriso amigável.",
+                skills: "Botânica, Medicina"
+            },
+            {
+                name: "Boris Ferro",
+                type: "Ferreiro",
+                damage: "d6+2",
+                ca: 15,
+                constitution: 14,
+                description: "Ferreiro robusto, especializado em armas e armaduras de qualidade.",
+                skills: "Forja, Reparo"
+            },
+            {
+                name: "Clara Fornada",
+                type: "Padeira",
+                damage: "d4",
+                ca: 11,
+                constitution: 12,
+                description: "Dona da padaria local, famosa por seus pães frescos e doces deliciosos.",
+                skills: "Culinária, Criatividade"
+            },
+            {
+                name: "Gerald Assovio",
+                type: "Mensageiro",
+                damage: "d3",
+                ca: 13,
+                constitution: 12,
+                description: "Mensageiro rápido e confiável, conhecido por nunca perder uma entrega.",
+                skills: "Velocidade, Orientação"
+            },
+            {
+                name: "Fiona Campos",
+                type: "Fazendeira",
+                damage: "d4-1",
+                ca: 12,
+                constitution: 13,
+                description: "Fazendeira trabalhadora, especialista no cultivo de trigo e criação de gado.",
+                skills: "Agricultura, Perseverança"
+            },
+            {
+                name: "Hugo Troquino",
+                type: "Comerciante de Roupas",
+                damage: "d3",
+                ca: 12,
+                constitution: 11,
+                description: "Comerciante carismático, sempre com tecidos raros e exóticos.",
+                skills: "Negociação, Avaliação"
+            },
+            {
+                name: "Lila Gota",
+                type: "Florista",
+                damage: "d3",
+                ca: 11,
+                constitution: 10,
+                description: "Florista encantadora, conhecida por criar arranjos florais únicos.",
+                skills: "Botânica, Estética"
+            },
+            {
+                name: "Marcus Fortemão",
+                type: "Carpinteiro",
+                damage: "d6",
+                ca: 13,
+                constitution: 13,
+                description: "Carpinteiro habilidoso, construtor de casas e móveis robustos.",
+                skills: "Carpintaria, Planejamento"
+            },
+            {
+                name: "Eliza Pontafina",
+                type: "Sapateira",
+                damage: "d4",
+                ca: 11,
+                constitution: 12,
+                description: "Especialista em consertar e fabricar calçados de alta qualidade.",
+                skills: "Design, Fabricação"
+            },
+            {
+                name: "Derek Barril",
+                type: "Entregador",
+                damage: "d3",
+                ca: 11,
+                constitution: 12,
+                description: "Entregador confiável, conhecido por sua força e pontualidade.",
+                skills: "Logística, Força"
+            },
+            {
+                name: "Sophia Doceágua",
+                type: "Vendedora de Frutas",
+                damage: "d4-1",
+                ca: 11,
+                constitution: 10,
+                description: "Sempre com frutas frescas e suculentas no mercado local.",
+                skills: "Agricultura, Atendimento"
+            },
+            {
+                name: "Tomás Tonel",
+                type: "Fabricante de Barris",
+                damage: "d6",
+                ca: 12,
+                constitution: 13,
+                description: "Fabricante renomado, especializado em barris para vinho e cerveja.",
+                skills: "Madeira, Precisão"
+            },
+            {
+                name: "Victor Claudino",
+                type: "Cocheiro",
+                damage: "d3+1",
+                ca: 12,
+                constitution: 12,
+                description: "Motorista experiente, especialista em viagens longas e seguras.",
+                skills: "Direção, Resistência"
+            },
+            {
+                name: "Evelyn Uater",
+                type: "Lavadeira",
+                damage: "d4-1",
+                ca: 10,
+                constitution: 11,
+                description: "Lavadeira dedicada, sempre deixando as roupas impecáveis.",
+                skills: "Lavagem, Dedicação"
             }
         ];
 
@@ -140,8 +516,8 @@
                         <div class="card-header">
                             <img class="avatar" src="${character.image || 'img/char/placeholder.webp'}" class="card-img-top" alt="Imagem de ${character.name}">
                             <div>
-                                <h5 class="card-title">${character.name}</h5>
-                                <p>das</p>
+                                <h5 class="card-title mb-0">${character.name}</h5>
+                                <p>${character.type || ''}</p>
                             </div>
                         </div>
                         <div class="card-body">
@@ -159,8 +535,8 @@
                                     <div class="value">${character.constitution}</div>
                                 </div>
                             </div>
-                            <strong>Descrição:</strong> ${character.description}<br>
-                            <strong>Perícias:</strong> ${character.skills}
+                            <h5><strong class="mb-3">Descrição:</strong> ${character.description}<br></h5>
+                            <h5><strong class="mb-3">Perícias:</strong> ${character.skills}</h5>
                             </p>
                         </div>
                     </div>

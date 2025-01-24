@@ -18,7 +18,9 @@
             transition: transform 0.2s, box-shadow 0.2s;
             aspect-ratio: 64/86;
             border: 1px solid #000;
-            background-color: #EFDBB2;
+            background: #EFDBB2;
+            page-break-inside: avoid;
+            break-inside: avoid;
         }
 
         .card:hover {
@@ -36,9 +38,14 @@
             border: 1px solid #000;
         }
 
+        .card-img-top {
+            background-color: #fff;
+            ;
+        }
+
         .card-body {
             padding: .5rem;
-            background-color: #EFDBB2;
+            background: #EFDBB2;
 
         }
 
@@ -52,43 +59,61 @@
             padding: 5px;
             margin-bottom: 0;
             border: 1px solid #000;
-            background-color: #fff;
+            background: #fff;
             margin: 8px 8px 0;
             border-radius: 12px;
         }
 
         .card-text {
-            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            font-size: 14px;
             font-weight: 700;
             border: 1px solid #000;
             margin: -12px -4px 0;
-            background-color: #fff;
+            background: #fff;
             border-radius: 4px;
             height: calc(100% + 16px);
-            display: flex;
-            align-items: center;
             padding: 20px;
         }
 
         .card .circle {
             border: 1px solid #000;
             border-radius: 50%;
-            background-color: #fff;
+            background: #fff;
             display: flex;
             position: absolute;
             align-items: center;
             justify-content: center;
-            aspect-ratio: 1 / 1;
             height: 35px;
+            width: 35px;
             top: -4px;
             left: -4px;
+            font-size: 8px;
         }
 
         .card .circle.icon {
-            background-color: #FB7C7C;
+            background: #FB7C7C;
             right: -4px;
             left: initial;
+        }
+
+        .card .circle.icon.weapon {
+            background-color: yellow;
+        }
+
+        .card .circle.icon.wand {
+            background-color: rgb(224, 35, 224);
+        }
+
+        .card .circle.icon.commom {
+            background-color: rgb(194, 121, 121);
+        }
+
+        .card .circle.icon.potion {
+            background-color: rgb(73, 219, 241);
         }
 
         .card .circle img {
@@ -102,8 +127,8 @@
 </head>
 
 <body>
-    <div class="container py-5">
-        <div id="characterList" class="mt-5">
+    <div class="container">
+        <div id="characterList">
             <div id="itemsCards" class="row g-3"></div>
         </div>
     </div>
@@ -112,40 +137,350 @@
         const items = [
             {
                 name: "Espada simples",
-                value: 12,
+                value: '1d4+2',
                 slots: 12,
                 descricao: "Arma modesta, ideal para o herói econômico.",
-                image: 'img/items/0.jpg'
+                image: 'img/items/0.jpg',
+                tipo: 'weapon',
+                qt: 8,
+            },
+            {
+                name: "Machado de batalha",
+                value: '1d8',
+                slots: 20,
+                descricao: "Uma poderosa arma de dois gumes para combates brutais.",
+                image: 'img/items/1.jpg',
+                tipo: 'weapon',
+                qt: 5,
+            },
+            {
+                name: "Machado",
+                value: '1d6+1',
+                slots: 20,
+                descricao: "Apenas um machado.",
+                image: 'img/items/machado.jpg',
+                tipo: 'weapon',
+                qt: 5,
+            },
+            {
+                name: "Poção de cura",
+                value: '2d4+2',
+                slots: 5,
+                descricao: "Restaura uma pequena quantidade de vida.",
+                image: 'img/items/2.jpg',
+                tipo: 'potion',
+                qt: 14,
+            },
+            {
+                name: "Escudo robusto",
+                value: '+2 CA',
+                slots: 25,
+                descricao: "Proporciona defesa adicional contra ataques.",
+                image: 'img/items/3.jpg',
+                tipo: 'armor',
+                qt: 4,
+            },
+            {
+                name: "Armadura de couro",
+                value: '+1 CA',
+                slots: 25,
+                descricao: "Uma armadura leve, oferecendo proteção básica.",
+                image: 'img/items/4.jpg',
+                tipo: 'armor',
+                qt: 5,
+            },
+            {
+                name: "Anel de fogo",
+                value: '1d8',
+                slots: 3,
+                descricao: "Permite lançar uma pequena rajada de fogo.",
+                image: 'img/items/5.jpg',
+                tipo: 'anel',
+            },
+            {
+                name: "Poção de invisibilidade",
+                value: 'N/A',
+                slots: 8,
+                descricao: "Torna o usuário invisível por um curto período.",
+                image: 'img/items/pocao-invisibilidade.jpg',
+                tipo: 'potion',
+                qt: 2,
+            },
+            {
+                name: "Capacete de ferro",
+                value: '+1 CA',
+                slots: 10,
+                descricao: "Proteção básica para a cabeça.",
+                image: 'img/items/capacete.jpg',
+                tipo: 'armor',
+                qt: 5,
+            },
+            {
+                name: "Isqueiro dourado",
+                value: 'N/A',
+                slots: 5,
+                descricao: "O isqueiro perfeito para o role",
+                image: 'img/items/10.jpg',
+                tipo: 'commom',
+            },
+            {
+                name: "Arco curvo",
+                value: '1d8',
+                slots: 30,
+                descricao: "",
+                image: 'img/items/11.jpg',
+                tipo: 'wand',
+                qt: 4,
+            },
+            {
+                name: "Capacete da guarda real",
+                value: '+2 CA',
+                slots: 25,
+                descricao: "Um capacete feito para guardas da guarda real. Robusto e resistente",
+                image: 'img/items/capacete-real.jpg',
+                tipo: 'armor',
+                qt: 3,
+            },
+            {
+                name: "Capacete pomposo",
+                value: '+1 CA',
+                slots: 25,
+                descricao: "Para aqueles que não tem timidês para se aparecerem",
+                image: 'img/items/capacete-pomposo.jpg',
+                tipo: 'armor',
+                qt: 2,
+            },
+            {
+                name: "Armadura de couro real",
+                value: '+3 CA',
+                slots: 25,
+                descricao: "Uma armadura adornada de couro da Guarda Real.",
+                image: 'img/items/12.jpg',
+                tipo: 'armor',
+                qt: 3,
+            },
+            {
+                name: "Lança longa",
+                value: '1d8',
+                slots: 40,
+                descricao: "Uma arma de alcance usada para ataques à distância segura.",
+                image: 'img/items/lanca.jpg',
+                tipo: 'weapon',
+                qt: 5,
+            },
+            {
+                name: "Adaga que as vezes cura",
+                value: '1d10-6',
+                slots: 4,
+                descricao: "Uma pequena lâmina extremamente afiada com bençam de cura mal lançado. O usuário pode jogar um d20 de cd15 para tentar fazer um corte raso.",
+                image: 'img/items/18.jpg',
+                tipo: 'weapon',
+            },
+            {
+                name: "Escudo de luz",
+                value: '+3 CA',
+                slots: 30,
+                descricao: "Brilha intensamente e protege contra ataques das trevas.",
+                image: 'img/items/escudo-encantado.jpg',
+                tipo: 'armor',
+            },
+            {
+                name: "Varinha de relâmpagos",
+                value: '1d10 raio',
+                slots: 8,
+                descricao: "Lança uma rajada de eletricidade contra inimigos.",
+                image: 'img/items/varinha-raio.jpg',
+                tipo: 'wand',
+            },
+            {
+                name: "Varinha da derrota",
+                value: '1d10 raio',
+                slots: 8,
+                descricao: "Faz o alvo perder qualquer jogo.",
+                image: 'img/items/varinha-derrota.jpg',
+                tipo: 'wand',
+            },
+            {
+                name: "Varinha musical",
+                value: '',
+                slots: 8,
+                descricao: "Uma varinha que produz qualquer som que o usuário quiser, caso ele tenha a capacidade de invocalos",
+                image: 'img/items/varinha-musical.jpg',
+                tipo: 'wand',
+            },
+            {
+                name: "Chave de ferro",
+                value: 'N/A',
+                slots: 1,
+                descricao: "Uma chave simples que abre uma porta ou baú comum.",
+                image: 'img/items/chave.jpg',
+                tipo: 'commom',
+                qt: 6,
+            },
+            {
+                name: "Chave dourada",
+                value: 'N/A',
+                slots: 1,
+                descricao: "Deve abrir algo importante.",
+                image: 'img/items/chave-dourada.jpg',
+                tipo: 'commom',
+            },
+            {
+                name: "Martelo",
+                value: '1d6',
+                slots: 8,
+                descricao: "Uma ferramenta robusta, útil para construção e combate improvisado.",
+                image: 'img/items/martelo.jpg',
+                tipo: 'weapon',
+                qt: 3,
+            },
+            {
+                name: "Livro possivelmente amaldiçoado",
+                value: 'Protege do sol',
+                slots: 2,
+                descricao: "Existe uma chance desse livro ser amaldiçoado, ninguem teve coragem de testar, então deixamos aí.",
+                image: 'img/items/livro-amaldiçoado.jpg',
+                tipo: 'commom',
+            },
+            {
+                name: "Cimitarra",
+                value: '1d6',
+                slots: 10,
+                descricao: "Uma lâmina curva rápida e versátil, ideal para combates ágeis.",
+                image: 'img/items/cimitarra.jpg',
+                tipo: 'weapon',
+                qt: 3,
+            },
+            {
+                name: "Espada longa",
+                value: '1d8',
+                slots: 15,
+                descricao: "Uma lâmina balanceada e confiável para combate corpo a corpo.",
+                image: 'img/items/espada-longa.jpg',
+                tipo: 'weapon',
+                qt: 4,
+            },
+            {
+                name: "Mangual",
+                value: '1d8+1',
+                slots: 18,
+                descricao: "Uma arma devastadora com uma bola de ferro presa a uma corrente.",
+                image: 'img/items/mangual.jpg',
+                tipo: 'weapon',
+                qt: 3,
+            },
+            {
+                name: "Clava",
+                value: '1d4+1',
+                slots: 8,
+                descricao: "Uma arma simples de madeira reforçada, ideal para combates improvisados.",
+                image: 'img/items/clava.jpg',
+                tipo: 'weapon',
+                qt: 3,
+            },
+            {
+                name: "Armadura de ferro",
+                value: '+3 CA',
+                slots: 50,
+                descricao: "Uma armadura completa feita de ferro, proporcionando grande proteção.",
+                image: 'img/items/armadura-ferro.jpg',
+                tipo: 'armor',
+                qt: 2,
+            },
+            {
+                name: "Escudo pequeno",
+                value: '+1 CA',
+                slots: 10,
+                descricao: "Um escudo portátil e fácil de manejar para defesa rápida.",
+                image: 'img/items/escudo-pequeno.jpg',
+                tipo: 'armor',
+                qt: 4,
+            },
+            {
+                name: "Adaga de aço",
+                value: '1d4',
+                slots: 4,
+                descricao: "Uma pequena lâmina afiada, fácil de esconder e ideal para ataques rápidos.",
+                image: 'img/items/adaga.jpg',
+                tipo: 'weapon',
+                qt: 5,
+            },
+            {
+                name: "Besta leve",
+                value: '1d8',
+                slots: 15,
+                descricao: "Uma arma de longo alcance fácil de usar, ideal para iniciantes.",
+                image: 'img/items/besta.jpg',
+                tipo: 'weapon',
+                qt: 4,
+            },
+            {
+                name: "Funda",
+                value: '1d4',
+                slots: 2,
+                descricao: "Uma arma simples de arremesso, eficaz a longa distância.",
+                image: 'img/items/funda.jpg',
+                tipo: 'weapon',
+                qt: 2,
+            },
+            {
+                name: "Manopla de couro",
+                value: '+1 CA',
+                slots: 5,
+                descricao: "Proteções leves para os braços, feitas de couro reforçado.",
+                image: 'img/items/manopla-couro.jpg',
+                tipo: 'armor',
+                qt: 5,
+            },
+            {
+                name: "Botas reforçadas",
+                value: '+1 CA',
+                slots: 10,
+                descricao: "Botas resistentes que protegem os pés e melhoram a estabilidade.",
+                image: 'img/items/botas-reforcadas.jpg',
+                tipo: 'armor',
+                qt: 5,
+            },
+            {
+                name: "Escudo grande",
+                value: '+2 CA',
+                slots: 25,
+                descricao: "Um escudo pesado que oferece excelente proteção, mas reduz a mobilidade.",
+                image: 'img/items/escudo-grande.jpg',
+                tipo: 'armor',
+                qt: 3,
             },
         ];
 
         function displayCharacters() {
             const itemsCards = document.getElementById('itemsCards');
-            itemsCards.innerHTML = items.map(item => `
-                <div class="col-4">
-                    <div class="card">
-                        <h5 class="card-title">
-                            <div class="circle value">2sl</div>
-                            ${item.name}
-                            <div class="circle icon">
-                                <img src="img/items/armor-type.png" alt="" srcset="">
-                             </div>
-                        </h5>
-                        <img src="${item.image || 'img/items/placeholder.png'}" class="card-img-top" alt="Imagem de ${item.name}">
-                        <div class="card-body">
-                            <p class="card-text">
-                                ${item.descricao}
-                            </p>
-                        </div>
+            itemsCards.innerHTML = items.map(item =>
+                Array(item.qt).fill().map(() =>
+                    `<div class="col-4">
+            <div class="card">
+                <h5 class="card-title">
+                    <div class="circle value">${item.value}</div>
+                    ${item.name}
+                    <div class="circle icon ${item.tipo}">
+                        <img src="img/items/${item.tipo}-type.png" alt="" srcset="">
                     </div>
+                </h5>
+                <img src="${item.image || 'img/items/placeholder.png'}" class="card-img-top" alt="Imagem de ${item.name}">
+                <div class="card-body">
+                    <p class="card-text">
+                        ${item.descricao}
+                    </p>
                 </div>
-            `).join('');
+            </div>
+        </div>`
+                ).join('')
+            ).join('');
+
         }
 
         // Exibe os personagens ao carregar a página
         displayCharacters();
     </script>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
