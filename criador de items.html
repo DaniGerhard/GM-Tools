@@ -23,6 +23,10 @@
             break-inside: avoid;
         }
 
+        .card-body {
+            padding: 0 !important;
+        }
+
         .card:hover {
             transform: scale(1.03);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
@@ -31,20 +35,19 @@
         .card img {
             display: block;
             border-radius: 0;
-            aspect-ratio: 9/8;
+            aspect-ratio: 9/7.3;
             object-fit: cover;
-            margin: 0 16px;
-            width: calc(100% - 32px);
+            margin: 0 8px;
+            width: calc(100% - 16px);
             border: 1px solid #000;
         }
 
         .card-img-top {
             background-color: #fff;
-            ;
         }
 
         .card-body {
-            padding: .5rem;
+            padding: 8px;
             background: #EFDBB2;
 
         }
@@ -52,36 +55,68 @@
         .card-title {
             display: block;
             position: relative;
-            font-size: 1rem;
-            font-weight: bold;
+            font-size: 14px;
+            font-weight: 600;
+            color: #343a40;
+            text-align: left;
+            padding: 4px 8px;
+            border: 1px solid #000;
+            background: #fff;
+            margin: 8px 8px 0 6px;
+            border-radius: 4px 4px 4px 4px;
+        }
+
+        .descricao-title {
+            display: block;
+            position: relative;
+            font-size: 14px;
+            font-weight: 500;
             color: #343a40;
             text-align: center;
             padding: 5px;
             margin-bottom: 0;
             border: 1px solid #000;
             background: #fff;
-            margin: 8px 8px 0;
+            margin: -0.6cm 8px 0;
             border-radius: 12px;
+            height: .6cm;
+            background-color: transparent !important;
+            border-color: transparent !important;
+        }
+
+        .descricao-title .circle {
+            border-radius: 2px !important;
+            background-color: #fff !important;
+            top: -1px !important;
+            width: initial !important;
+            padding: .3cm;
+            font-size: 8pt !important;
+            font-weight: 700;
+            height: calc(100% + 2px) !important;
+            border-width: .002cm !important;
+        }
+
+        .descricao-title .circle:empty {
+            display: none !important;
         }
 
         .card-text {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            font-size: 14px;
-            font-weight: 700;
+            font-size: 9pt;
+            font-weight: 400;
             border: 1px solid #000;
+            text-align: left;
             margin: -12px -4px 0;
             background: #fff;
             border-radius: 4px;
+            line-height: 1;
             height: calc(100% + 16px);
-            padding: 20px;
+            padding: .55cm .4cm .3cm;
         }
 
         .card .circle {
             border: 1px solid #000;
-            border-radius: 50%;
+            border-radius: 10px;
             background: #fff;
             display: flex;
             position: absolute;
@@ -89,7 +124,7 @@
             justify-content: center;
             height: 35px;
             width: 35px;
-            top: -4px;
+            top: -3px;
             left: -4px;
             font-size: 8px;
         }
@@ -101,11 +136,15 @@
         }
 
         .card .circle.icon.weapon {
-            background-color: yellow;
+            background-color: rgb(245, 245, 95);
+        }
+
+        .card .circle.icon.artifact {
+            background-color: rgb(250, 250, 223);
         }
 
         .card .circle.icon.wand {
-            background-color: rgb(224, 35, 224);
+            background-color: rgb(214, 97, 214);
         }
 
         .card .circle.icon.commom {
@@ -199,7 +238,7 @@
             },
             {
                 name: "Poção de invisibilidade",
-                value: 'N/A',
+                value: '',
                 slots: 8,
                 descricao: "Torna o usuário invisível por um curto período.",
                 image: 'img/items/pocao-invisibilidade.jpg',
@@ -217,11 +256,11 @@
             },
             {
                 name: "Isqueiro dourado",
-                value: 'N/A',
+                value: '',
                 slots: 5,
                 descricao: "O isqueiro perfeito para o role",
                 image: 'img/items/10.jpg',
-                tipo: 'commom',
+                tipo: 'artifact',
             },
             {
                 name: "Arco curvo",
@@ -310,7 +349,7 @@
             },
             {
                 name: "Chave de ferro",
-                value: 'N/A',
+                value: '',
                 slots: 1,
                 descricao: "Uma chave simples que abre uma porta ou baú comum.",
                 image: 'img/items/chave.jpg',
@@ -319,7 +358,7 @@
             },
             {
                 name: "Chave dourada",
-                value: 'N/A',
+                value: '',
                 slots: 1,
                 descricao: "Deve abrir algo importante.",
                 image: 'img/items/chave-dourada.jpg',
@@ -336,11 +375,10 @@
             },
             {
                 name: "Livro possivelmente amaldiçoado",
-                value: 'Protege do sol',
                 slots: 2,
                 descricao: "Existe uma chance desse livro ser amaldiçoado, ninguem teve coragem de testar, então deixamos aí.",
                 image: 'img/items/livro-amaldiçoado.jpg',
-                tipo: 'commom',
+                tipo: 'artifact',
             },
             {
                 name: "Cimitarra",
@@ -450,22 +488,47 @@
                 tipo: 'armor',
                 qt: 3,
             },
+            {
+                name: "Khopesh de Anúbis",
+                value: "d8",
+                slots: 15,
+                descricao: "Uma lâmina curva imbuída com a fúria do submundo. Seu fio cruel rasga armaduras e almas.",
+                image: "img/items/khopesh-anubis.jpg",
+                tipo: "weapon",
+                qt: 1,
+                efeitos: ["Corte profundo", "Maldição das Sombras"]
+            },
+            {
+                name: "Amuleto da Sabedoria",
+                value: '+2 Inteligência',
+                slots: 5,
+                descricao: "Um amuleto antigo que aumenta o poder mental do portador.",
+                image: 'img/items/14.jpg',
+                tipo: 'artifact',
+            },
         ];
 
         function displayCharacters() {
+            let count = 0;
             const itemsCards = document.getElementById('itemsCards');
             itemsCards.innerHTML = items.map(item =>
                 Array(item.qt).fill().map(() =>
                     `<div class="col-4">
             <div class="card">
                 <h5 class="card-title">
-                    <div class="circle value">${item.value}</div>
                     ${item.name}
                     <div class="circle icon ${item.tipo}">
                         <img src="img/items/${item.tipo}-type.png" alt="" srcset="">
                     </div>
                 </h5>
                 <img src="${item.image || 'img/items/placeholder.png'}" class="card-img-top" alt="Imagem de ${item.name}">
+                <h5 class="descricao-title">
+                    <div class="circle value">${item.value}</div>
+                    <div></div>
+                    <div class="circle icon ">
+                        ${item.slots} slots
+                    </div>
+                </h5>
                 <div class="card-body">
                     <p class="card-text">
                         ${item.descricao}
@@ -475,7 +538,6 @@
         </div>`
                 ).join('')
             ).join('');
-
         }
 
         // Exibe os personagens ao carregar a página
